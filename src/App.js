@@ -1,25 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import countriesList from './countries.js';
+import Pagination from '@mui/material/Pagination';
 
-function App() {
+function PaginationComponent({ children, pageCount }) {
+  const handleChange = (e, value) => {
+    console.log(e, value);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+      {children}
+      <div className="pagination-btns">
+        Showing 1 - 10 of 200 countries
+        <Pagination onChange={handleChange} count={10} color="primary" />
+      </div>
+    </>
+  );
+}
+
+function ListTile({ name, code }) {
+  return (
+    <div className="list-tile">
+      <h3>Name - {name}</h3>
+      <h3>Country code - {code}</h3>
     </div>
   );
 }
 
-export default App;
+function ListWrapper() {
+  return (
+    <>
+      <ListTile name={countriesList[0].name} code={countriesList[0].code} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <div className='App'>
+      <PaginationComponent>
+        <ListWrapper />
+      </PaginationComponent>
+    </div>
+  );
+}
