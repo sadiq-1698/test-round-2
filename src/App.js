@@ -1,22 +1,7 @@
-import './App.css';
-import React from 'react';
-import countriesList from './countries.js';
-import Pagination from '@mui/material/Pagination';
-
-function PaginationComponent({ children, pageCount }) {
-  const handleChange = (e, value) => {
-    console.log(e, value);
-  }
-  return (
-    <>
-      {children}
-      <div className="pagination-btns">
-        Showing 1 - 10 of 200 countries
-        <Pagination onChange={handleChange} count={10} color="primary" />
-      </div>
-    </>
-  );
-}
+import "./App.css";
+import React from "react";
+import countriesList from "./countries.js";
+import Pagination from "@mui/material/Pagination";
 
 function ListTile({ name, code }) {
   return (
@@ -35,12 +20,25 @@ function ListWrapper() {
   );
 }
 
+function PaginationComponent({ children, pageCount }) {
+  const handleChange = (e, value) => {
+    console.log(e, value);
+  };
+  return (
+    <>
+      <ListWrapper />
+      <div className="pagination-btns">
+        Showing 1 - 10 of 200 countries
+        <Pagination onChange={handleChange} count={10} color="primary" />
+      </div>
+    </>
+  );
+}
+
 export default function App() {
   return (
-    <div className='App'>
-      <PaginationComponent>
-        <ListWrapper />
-      </PaginationComponent>
+    <div className="App">
+      <PaginationComponent pageCount={10} />
     </div>
   );
 }
